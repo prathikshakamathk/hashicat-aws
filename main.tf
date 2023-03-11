@@ -139,7 +139,7 @@ resource "aws_eip" "hashicat" {
     owner = "${var.prefix}"
     se-region ="us-east-1"
     purpose = "application deployment"
-    terraform = "True"
+    terraform = "true"
     Environment = "dev"
 
   }
