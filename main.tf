@@ -18,6 +18,11 @@ resource "aws_vpc" "hashicat" {
   tags = {
     name = "${var.prefix}-vpc-${var.region}"
     environment = "Production"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
   }
 }
 
@@ -27,6 +32,11 @@ resource "aws_subnet" "hashicat" {
 
   tags = {
     name = "${var.prefix}-subnet"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
   }
 }
 
@@ -66,6 +76,11 @@ resource "aws_security_group" "hashicat" {
 
   tags = {
     Name = "${var.prefix}-security-group"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
   }
 }
 
@@ -74,6 +89,11 @@ resource "aws_internet_gateway" "hashicat" {
 
   tags = {
     Name = "${var.prefix}-internet-gateway"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
   }
 }
 
@@ -89,6 +109,18 @@ resource "aws_route_table" "hashicat" {
 resource "aws_route_table_association" "hashicat" {
   subnet_id      = aws_subnet.hashicat.id
   route_table_id = aws_route_table.hashicat.id
+
+    tags = {
+    Name = "${var.prefix}-hashicat-instance"
+    Department = "devops"
+    Billable = "true"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
+
+  }
 }
 
 data "aws_ami" "ubuntu" {
@@ -111,11 +143,35 @@ data "aws_ami" "ubuntu" {
 resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
   vpc      = true
+
+    tags = {
+    Name = "${var.prefix}-hashicat-instance"
+    Department = "devops"
+    Billable = "true"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
+
+  }
 }
 
 resource "aws_eip_association" "hashicat" {
   instance_id   = aws_instance.hashicat.id
   allocation_id = aws_eip.hashicat.id
+
+   tags = {
+    Name = "${var.prefix}-hashicat-instance"
+    Department = "devops"
+    Billable = "true"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
+
+  }
 }
 
 resource "aws_instance" "hashicat" {
