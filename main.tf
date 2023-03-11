@@ -109,18 +109,6 @@ resource "aws_route_table" "hashicat" {
 resource "aws_route_table_association" "hashicat" {
   subnet_id      = aws_subnet.hashicat.id
   route_table_id = aws_route_table.hashicat.id
-
-    tags = {
-    Name = "${var.prefix}-hashicat-instance"
-    Department = "devops"
-    Billable = "true"
-    owner = "${var.prefix}"
-    se-region ="us-east-1"
-    purpose = "application deployment"
-    terraform = "True"
-    Environment = "dev"
-
-  }
 }
 
 data "aws_ami" "ubuntu" {
@@ -161,17 +149,6 @@ resource "aws_eip_association" "hashicat" {
   instance_id   = aws_instance.hashicat.id
   allocation_id = aws_eip.hashicat.id
 
-   tags = {
-    Name = "${var.prefix}-hashicat-instance"
-    Department = "devops"
-    Billable = "true"
-    owner = "${var.prefix}"
-    se-region ="us-east-1"
-    purpose = "application deployment"
-    terraform = "True"
-    Environment = "dev"
-
-  }
 }
 
 resource "aws_instance" "hashicat" {
