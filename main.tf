@@ -39,7 +39,7 @@ resource "aws_security_group" "hashicat" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["117.200.101.164/32"]
   }
 
   ingress {
@@ -60,7 +60,7 @@ resource "aws_security_group" "hashicat" {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
+    cidr_blocks     = ["117.200.101.164/32"]
     prefix_list_ids = []
   }
 
@@ -130,6 +130,12 @@ resource "aws_instance" "hashicat" {
     Name = "${var.prefix}-hashicat-instance"
     Department = "devops"
     Billable = "true"
+    owner = "${var.prefix}"
+    se-region ="us-east-1"
+    purpose = "application deployment"
+    terraform = "True"
+    Environment = "dev"
+
   }
 }
 
