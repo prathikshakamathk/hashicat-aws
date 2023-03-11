@@ -136,12 +136,6 @@ resource "aws_eip" "hashicat" {
     Name = "${var.prefix}-hashicat-instance"
     Department = "devops"
     Billable = "true"
-    owner = "${var.prefix}"
-    se-region ="us-east-1"
-    purpose = "application deployment"
-    terraform = "true"
-    Environment = "dev"
-
   }
 }
 
